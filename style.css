@@ -1,0 +1,38 @@
+*{
+	box-sizing:border-box;
+}
+
+body{
+	background-color: #231722
+}
+
+body *{
+	color:white;
+	margin:auto;
+	text-align:center;
+}
+
+canvas{
+	display:block;
+	border:solid 1px white;
+	left:0;
+	right:0;
+}
+
+.form{
+	margin-top: 10px;
+	color:black;
+	background-color: white;
+	width:50%;
+	height: 30vh;
+	padding:20px;
+	box-shadow: 2px 2px 5px black
+}
+
+.form label{
+	color:black;
+}
+
+.form * {
+	color:black;
+}
