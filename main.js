@@ -36,10 +36,10 @@ let player = {
 	x: 0,
 	y: 0,
 	hold: false,
-	klawiszW: false,
-	klawiszS: false,
-	klawiszA: false,
-	klawiszD: false,
+	keyW: false,
+	keyS: false,
+	keyA: false,
+	keyD: false,
 	speed: 10,
 
 	draw: function(x, y, w, h){
@@ -49,26 +49,28 @@ let player = {
 		ctx.stroke();
 	},
 		listenForKey: function(e){
-			if(e.key == 's'){
-				player.klawiszS = true;
-			}
+			switch(e.key.toLowerCase()){
+			case 's':
+				player.keyS = true;
+			break;
 
-			if(e.key == 'w'){
-				player.klawiszW = true;
-			}
+			case 'w':
+				player.keyW = true;
+			break;
 
-			if(e.key == 'd'){
-				player.klawiszD = true;
-			}
+			case 'd':
+				player.keyD = true;
+			break;
 
-			if(e.key == 'a'){
-				player.klawiszA = true;
+			case 'a':
+				player.keyA = true;
+			break;
+			return;
 			}
-		return;
 	},
 
 	updateFrame: function(){
-			if(player.klawiszW){
+			if(player.keyW){
 				if(player.y >= 0){
 					player.y -= player.speed;
 					if(player.y < 0){player.y = 0}
@@ -80,7 +82,7 @@ let player = {
 					
 				}
 			}
-			if(player.klawiszS){
+			if(player.keyS){
 				if(player.y + player.height <= canvas.height)
 					player.y += player.speed;
 					if(player.y + player.height > canvas.height){player.y = canvas.height - player.height}
@@ -90,7 +92,7 @@ let player = {
 						}
 					});
 			}
-			if(player.klawiszA){
+			if(player.keyA){
 				if(player.x >= 0){
 						player.x -= player.speed;
 						if(player.x <= 0){player.x = 0}
@@ -102,7 +104,7 @@ let player = {
 				}
 			}
 
-			if(player.klawiszD){
+			if(player.keyD){
 				if(player.x + player.width <= canvas.width){
 						player.x += player.speed;
 						 if(player.x + player.width > canvas.width){ player.x = canvas.width - player.width}
@@ -122,29 +124,29 @@ let player = {
 	},
 
 	keyUp: function(e){
-		//console.log(e);
-		if(e.key == 's'){
-		player.klawiszS = false;
-		}
+		switch(e.key.toLowerCase()){
+			case 's':
+				player.keyS = false;
+			break;
 
-		if(e.key == 'w'){
-		player.klawiszW = false;
-		}
+			case 'w':
+				player.keyW = false;
+			break;
 
-		if(e.key == 'd'){
-		player.klawiszD = false;
-		}
+			case 'd':
+				player.keyD = false;
+			break;
 
-		if(e.key == 'a'){
-		player.klawiszA = false;
-		}
+			case 'a':
+				player.keyA = false;
+			break;
+			return;
+			}
 
 	},
 	colliding: function(collider){
 		if((player.x + player.width > collider.x && player.x < collider.x+collider.width) && (player.y < collider.y + collider.height && player.y+player.height > collider.y)){
-//			console.log('hit');
 			return true;
-	//*		player.x = collider.x - player.width;
 		}
 		else{
 			return false;
@@ -177,9 +179,3 @@ new collision.create( 200, 0, 1, 600);
 new collision.create( 200, 599, 450, 1, 'open');
 new collision.create( 649, 100, 1, 500, 'open');
 new collision.create( 370, 100, 280, 1, 'open');
-
-/* //opens bottom
-for(var i=0; i < collisions.length; i++){
-   if(collisions[i].name == "open"){delete collisions[i]}
-}
-*/
